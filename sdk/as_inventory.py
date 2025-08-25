@@ -235,7 +235,9 @@ class AndromedaInventory(dict):
                 ).select(
                     ds.ResourceGroupConnection.edges.select(
                         ds.ResourceGroupEdge.node.select(
-                            *gql_snippets.list_trivial_fields_ResourceGroup(ds),
+                            ds.ResourceGroup.id(),
+                            ds.ResourceGroup.name(),
+                            ds.ResourceGroup.externalId(),
                         )
                     ),
                     ds.ResourceGroupConnection.pageInfo.select(
@@ -899,22 +901,22 @@ class AndromedaInventory(dict):
                                 ds.GroupMembers.humanUsers(
                                     pageArgs={"pageSize": 100},
                                 ).select(
-                                    ds.IdentityOriginDataConnection.edges.select(
-                                        ds.IdentityOriginDataEdge.node.select(
+                                    ds.GroupHumanMembersDataConnection.edges.select(
+                                        ds.GroupHumanMembersDataEdge.node.select(
                                             *gql_snippets.list_trivial_fields_IdentityOriginData(ds),
                                         ),
                                     ),
-                                    ds.IdentityOriginDataConnection.pageInfo.select(
+                                    ds.GroupHumanMembersDataConnection.pageInfo.select(
                                         *gql_snippets.list_trivial_fields_PageInfo(ds),
                                     ),
                                 ),
                                 ds.GroupMembers.serviceIdentities.select(
-                                    ds.ServiceIdentitiesConnection.edges.select(
-                                        ds.ServiceIdentityEdge.node.select(
+                                    ds.GroupNonHumanMembersDataConnection.edges.select(
+                                        ds.GroupNonHumanMembersDataEdge.node.select(
                                             *gql_snippets.list_trivial_fields_ServiceIdentity(ds),
                                         ),
                                     ),
-                                    ds.ServiceIdentitiesConnection.pageInfo.select(
+                                    ds.GroupNonHumanMembersDataConnection.pageInfo.select(
                                         *gql_snippets.list_trivial_fields_PageInfo(ds),
                                     ),
                                 ),
@@ -930,8 +932,8 @@ class AndromedaInventory(dict):
                             ds.ProviderGroupsData.members.select(
                                 *gql_snippets.list_trivial_fields_ProviderGroupMembers(ds),
                                 ds.GroupMembers.humanUsers.select(
-                                    ds.IdentityOriginDataConnection.edges.select(
-                                        ds.IdentityOriginDataEdge.node.select(
+                                    ds.GroupHumanMembersDataConnection.edges.select(
+                                        ds.GroupHumanMembersDataEdge.node.select(
                                             *gql_snippets.list_trivial_fields_IdentityOriginData(ds),
                                         ),
                                     ),
@@ -940,12 +942,12 @@ class AndromedaInventory(dict):
                                     # ),
                                 ),
                                 ds.GroupMembers.serviceIdentities.select(
-                                    ds.ServiceIdentitiesConnection.edges.select(
-                                        ds.ServiceIdentityEdge.node.select(
+                                    ds.GroupNonHumanMembersDataConnection.edges.select(
+                                        ds.GroupNonHumanMembersDataEdge.node.select(
                                             *gql_snippets.list_trivial_fields_ServiceIdentity(ds),
                                         ),
                                     ),
-                                    ds.ServiceIdentitiesConnection.pageInfo.select(
+                                    ds.GroupNonHumanMembersDataConnection.pageInfo.select(
                                         *gql_snippets.list_trivial_fields_PageInfo(ds),
                                     ),
                                 ),
@@ -990,22 +992,22 @@ class AndromedaInventory(dict):
                             ds.GroupMembers.humanUsers(
                                 pageArgs={"pageSize": 100},
                             ).select(
-                                ds.IdentityOriginDataConnection.edges.select(
-                                    ds.IdentityOriginDataEdge.node.select(
+                                ds.GroupHumanMembersDataConnection.edges.select(
+                                    ds.GroupHumanMembersDataEdge.node.select(
                                         *gql_snippets.list_trivial_fields_IdentityOriginData(ds),
                                     ),
                                 ),
-                                ds.IdentityOriginDataConnection.pageInfo.select(
+                                ds.GroupHumanMembersDataConnection.pageInfo.select(
                                     *gql_snippets.list_trivial_fields_PageInfo(ds),
                                 ),
                             ),
                             ds.GroupMembers.serviceIdentities.select(
-                                ds.ServiceIdentitiesConnection.edges.select(
-                                    ds.ServiceIdentityEdge.node.select(
+                                ds.GroupNonHumanMembersDataConnection.edges.select(
+                                    ds.GroupNonHumanMembersDataEdge.node.select(
                                         *gql_snippets.list_trivial_fields_ServiceIdentity(ds),
                                     ),
                                 ),
-                                ds.ServiceIdentitiesConnection.pageInfo.select(
+                                ds.GroupNonHumanMembersDataConnection.pageInfo.select(
                                     *gql_snippets.list_trivial_fields_PageInfo(ds),
                                 ),
                             ),
@@ -1056,12 +1058,12 @@ class AndromedaInventory(dict):
                                     pageArgs={"pageSize": page_size, "skip": skip},
                                     filters=filters
                                 ).select(
-                                    ds.IdentityOriginDataConnection.edges.select(
-                                        ds.IdentityOriginDataEdge.node.select(
+                                    ds.GroupHumanMembersDataConnection.edges.select(
+                                        ds.GroupHumanMembersDataEdge.node.select(
                                             *gql_snippets.list_trivial_fields_IdentityOriginData(ds),
                                         ),
                                     ),
-                                    ds.IdentityOriginDataConnection.pageInfo.select(
+                                    ds.GroupHumanMembersDataConnection.pageInfo.select(
                                         *gql_snippets.list_trivial_fields_PageInfo(ds),
                                     ),
                                 ),
@@ -1187,12 +1189,12 @@ class AndromedaInventory(dict):
                                 ds.Group.members.select(
                                     *gql_snippets.list_trivial_fields_GroupMembers(ds),
                                     ds.GroupMembers.humanUsers.select(
-                                        ds.IdentityOriginDataConnection.pageInfo.select(
+                                        ds.GroupHumanMembersDataConnection.pageInfo.select(
                                             *gql_snippets.list_trivial_fields_PageInfo(ds),
                                         )
                                     ),
                                     ds.GroupMembers.serviceIdentities.select(
-                                        ds.ServiceIdentitiesConnection.pageInfo.select(
+                                        ds.GroupNonHumanMembersDataConnection.pageInfo.select(
                                             *gql_snippets.list_trivial_fields_PageInfo(ds),
                                         )
                                     ),
@@ -3050,6 +3052,41 @@ class AndromedaInventory(dict):
         for event in self.as_gql_generic_itr(partial_fn_itr, page_size=page_size):
             yield event
 
+    def as_recommendations_base_fn(self, filters: dict, page_size: int, skip: int) -> Generator[list, None, None]:
+        """Fetch events with username, id, and name."""
+        logger.debug("Fetching events with filters %s page_size %s skip %s",
+                    filters, page_size, skip)
+        ds = DSLSchema(self.gql_client.schema)
+        query = dsl_gql(DSLQuery(
+            ds.Query.Recommendations(
+                filters=filters,
+                pageArgs={"pageSize": page_size, "skip": skip},
+            ).select(
+                ds.RecommendationConnection.edges.select(
+                    ds.RecommendationEdge.node.select(
+                        *gql_snippets.list_trivial_fields_RecommendationNode(ds),
+                        ds.RecommendationNode.origin.select(
+                            *gql_snippets.list_trivial_fields_RecommendationOrigin(ds),
+                        ) # Existing provider fields
+                    )
+                )
+            )
+        ))
+        response = self.gql_client.execute(query, get_execution_result=True).formatted
+        if response.get("errors"):
+            logger.error("errors in the response %s", response["errors"])
+        recommendationNodes = response["data"]["Recommendations"]["edges"]
+        recommendations = [r['node'] for r in recommendationNodes]
+        logger.debug("num events returned %s", len(recommendations))
+        return recommendations
+
+    def as_recommendations_itr(self, filters: dict = None, page_size: int = None) -> Generator[dict, None, None]:
+        """ Iterate through recommendations"""
+        page_size = page_size if page_size else self.default_page_size
+        partial_fn_itr = functools.partial(
+            self.as_recommendations_base_fn, filters)
+        for recommendation in self.as_gql_generic_itr(partial_fn_itr, page_size=page_size):
+            yield recommendation
 
 def dev_download_resolved_resolved_bindings(ai: AndromedaInventory) -> None:
     """ Download the resolved active bindings for all providers """

@@ -1,0 +1,86 @@
+settings:
+  name: "Andromeda Configuration"
+  user: gaurav@beatles.ai
+  api_endpoint: "https://api.test.andromedasecurity.com"
+  graphql_endpoint: "https://api.test.andromedasecurity.com"
+
+  idp_provider:
+    name: "Beatles Okta IDP"
+    provider_type: 'PROVIDER_TYPE_OKTA'
+    category: "IDP"
+    oktaConfiguration:
+      api_endpoint: "https://dev-46660721.okta.com/"
+      name: "beatles Okta"
+      enable_application_provider_discovery: true
+      #asAccessTokenSecretName: FIXME
+  environments: []
+    # - name: Experiments
+    #   criticality: CRITICALITY_MEDIUM
+    # - name: USWest1Production
+    #   criticality: CRITICALITY_LOW
+  cloud_provider:
+    name: Beatles AWS with IAM SSO
+    provider_type: "PROVIDER_TYPE_AWS"
+    is_iam_sso: true
+    provisioningConfig:
+      provisioningPolicy: IDENTITY_ACCESS_VIA_GROUP_BINDING
+      # Only supported for AWS with IDP and IAM SSO
+      managedProvisioningGroupConfig:
+        #use_idp_sso_app_group_filter: true
+        groupNameMatchCriteria:
+          matchNameValue: 'aws#{{accountName}}#{{policyName}}#{{accountId}}'
+        createEnabled: false
+        deleteEnabled: false
+    # AWS Specific Settings
+    awsConfiguration:
+      accountsConfig:
+        accounts:
+        - accountId: "390403893726"
+          isManagementAccount: true
+        # - accountId: "FIXME"
+        #   isManagementAccount: false
+      cloudtrailConfig:
+        trails: []
+        # - trailArn: "FIXME"
+      authConfig:
+        authMode: "AWS_AUTHMODE_ASSUME_ROLE"
+        assumeRole:
+          roleName: "as-andromeda-role"
+          roleAccountId: "*"
+          externalId: "FIXME"
+
+    environment_mapping_policies_patches: []
+    # - name: "Environment Mapping Policy"
+    #   # uses the name to identify the rule ID. If rule is not found it will add
+    #   add_rules:
+    #   - name: experiements_mapping
+    #     id: "0"
+    #     enabled: true
+    #     matchTarget:
+    #       tagMatch:
+    #         matchKeyCriteria: STARTS_WITH
+    #         matchKeyStr: env
+    #         matchValueCriteria: EXACT
+    #         matchValueStr:
+    #         - experiments
+    #         - exp
+    #     lookupTagValue: false
+    #     environment_name: Experiments
+    sensitivity_mapping_policies_patches: []
+    # - name: "beatles sensitivity mapping policy"
+    #   # uses the name to identify the rule ID. If rule is not found it will add
+    #   add_rules:
+    #   - name: data=true
+    #     enabled: true
+    #     matchTarget:
+    #       tagMatch:
+    #         matchKeyCriteria: "CONTAINS"
+    #         matchKeyStr: "data"
+    #         matchValueCriteria: "EXACT"
+    #         matchValueStr:
+    #         # important that the quotes are not removed from true and yes as these are strings
+    #         - "true"
+    #         - "yes"
+    #     sensitive: true
+    #   delete_rules:
+    #   - name: something=true

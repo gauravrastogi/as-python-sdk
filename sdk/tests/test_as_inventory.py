@@ -289,3 +289,8 @@ def test_events(ai: AndromedaInventory):
         assert event["id"] in jit_txns[event["eventPrimaryKey"]], (
             f"Event ID {event['id']} is not in the jit txns"
         )
+
+def test_recommendations(ai: AndromedaInventory):
+    for recommendation in ai.as_recommendations_itr():
+        assert recommendation['id'], f"recommendation missing id {recommendation}"
+        assert recommendation['category'], f"recommendation missing category {recommendation}"

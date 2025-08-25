@@ -110,7 +110,7 @@ class APIUtils:
             resource_id: str = "", resource_name: str = "", obj: dict = None) -> tuple[int, dict]:
         try:
             status_code = 200
-            logger.debug("resource_type %s resource_name %s resource_id %s",
+            logger.info("resource_type %s resource_name %s resource_id %s",
                          resource_type, resource_name, resource_id)
             if resource_name and not resource_id:
                 status_code, existing_obj = self.get_resource_by_name(
@@ -121,11 +121,11 @@ class APIUtils:
                     op = 'put'
                     url = self.get_resource_url(
                         resoure_type=resource_type, resource_id=obj['id'])
-                    logger.debug("found existing resource %s with id %s status_code %s",
-                                resource_name, existing_obj, status_code)
+                    #logger.debug("found existing resource %s with id %s status_code %s",
+                    #            resource_name, existing_obj, status_code)
                 else:
                     # did not find the object so create it. Note cannot be subresource here
-                    logger.debug("creating new resource %s", resource_name)
+                    #logger.debug("creating new resource %s", resource_name)
                     op = 'post'
                     url = self.get_resource_url(
                         resoure_type=resource_type)
@@ -140,7 +140,7 @@ class APIUtils:
 
             response = getattr(api_session, op)(url, json=obj, verify=False)
             status_code, obj = response.status_code, response.json()
-            logger.info("status_code %s obj %s", status_code, obj)
+            logger.debug("url:%s op:%s status_code:%s obj:%s", url, op, status_code, obj)
         except Exception as exc:
             logger.error('Failed to create provider object')
             logger.error('exception %s\n %s', exc, traceback.format_exc())
@@ -161,7 +161,7 @@ class APIUtils:
                 r = [r for r in response.json()['results'] if r['name'] == resource_name]
                 if r :
                     resource_obj = r[0]
-                    logger.info("found resource %s %s",resource_type, resource_obj)
+                    logger.debug("found resource %s %s",resource_type, resource_obj['name'])
                 else:
                     status_code = 404
             else:
@@ -186,7 +186,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating azure config for provider %s,  %s", provider_id, azure_provider_obj)
+        #logger.info("creating azure config for provider %s,  %s", provider_id, azure_provider_obj)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/azure/config")
@@ -198,7 +198,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating entra config for provider %s", provider_id)
+        #logger.debug("creating entra config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/entra/config")
@@ -210,7 +210,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating aws config for provider %s data %s", provider_id, aws_provider_obj)
+        #logger.debug("creating aws config for provider %s data %s", provider_id, aws_provider_obj)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/aws/config")
@@ -224,7 +224,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating okta config for provider %s", provider_id)
+        #logger.debug("creating okta config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/okta/config")
@@ -290,7 +290,7 @@ class APIUtils:
             logger.error("config for provider op %s url %s provider %s status %s obj %s response %s",
                         op, config_url, provider_obj['id'], response.status_code, new_config, response.json())
         else:
-            logger.info("config for provider op %s url %s provider %s status %s response %s",
+            logger.debug("config for provider op %s url %s provider %s status %s response %s",
                         op, config_url, provider_obj['id'], response.status_code, response.json())
         return response.status_code, response.json()
 
@@ -299,7 +299,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating %s config for provider %s", provider_type, provider_id)
+        #logger.info("creating %s config for provider %s", provider_type, provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/{provider_type}/config")
@@ -314,28 +314,22 @@ class APIUtils:
             provider_id,
             provider_config,
             provider_url: str) -> tuple[int, dict]:
-
-        logger.info("creating config for provider %s: %s", provider_id, provider_config)
         # check if the aws config is already present
         response = api_session.get(provider_url)
-        logger.info("config for provider %s status %s obj %s",
-                    provider_url, response.status_code, response.json())
+        #logger.debug("config for provider %s status %s obj %s",
+        #            provider_url, response.status_code, response.json())
         resource_id = ""
         if response.status_code == 200 and response.json():
             resource_id = response.json()['id']
             provider_config['id'] = resource_id
             provider_config['updatedAt'] = response.json()['updatedAt']
-            logger.debug("existing provider found -  provider config %s", response.json())
-        else:
-            logger.debug("new provider config status: %s rsp %s", response.status_code, response.json())
+            #logger.debug("existing provider found -  provider config %s", response.json())
         op = "put" if resource_id else "post"
         response = getattr(api_session, op)(provider_url, json=provider_config, verify=False)
         if response.status_code != 200:
-            logger.error("config for provider op %s url %s provider %s status %s obj %s response %s",
-                        op, provider_url, provider_id, response.status_code, provider_config, response.json())
-        else:
-            logger.info("config for provider op %s url %s provider %s status %s response %s",
-                        op, provider_url, provider_id, response.status_code, response.json())
+            logger.error("provider op:%s url:%s provider:%s status:%s obj:%s response:%s",
+                        op, provider_url, provider_id, response.status_code, provider_config,
+                        response.json())
         return response.status_code, response.json()
 
     def create_or_update_environment(self, api_session: requests.Session, environment_obj: dict) -> (int, dict):
@@ -620,7 +614,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating gcp config for provider %s", provider_id)
+        #logger.info("creating gcp config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/gcp/config")
@@ -633,7 +627,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating gcp config for provider %s", provider_id)
+        #logger.info("creating gcp config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/salesforce/config")
@@ -646,7 +640,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating gcp config for provider %s", provider_id)
+        #logger.info("creating gcp config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/atlas/config")
@@ -709,7 +703,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating ad config for provider %s", provider_id)
+        #logger.info("creating ad config for provider %s", provider_id)
         # check if the aws config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/activedirectory/config")
@@ -768,7 +762,7 @@ class APIUtils:
         """
         This function creates or updates the cloud specific settings for a provider
         """
-        logger.info("creating pingone config for provider %s", provider_id)
+        #logger.info("creating pingone config for provider %s", provider_id)
         # check if the pingone config is already present
         url = self.get_resource_url(
                 resoure_type=f"providers/{provider_id}/pingone/config")
