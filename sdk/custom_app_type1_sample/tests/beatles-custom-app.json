@@ -1,0 +1,485 @@
+{
+  "users": {
+    "matt.james@beatles.ai": {
+      "id": "matt.james@beatles.ai",
+      "username": "matt.james@beatles.ai",
+      "name": "Matt James",
+      "status": "ENABLED"
+    },
+    "marcus.smith@beatles.ai": {
+      "id": "marcus.smith@beatles.ai",
+      "username": "marcus.smith@beatles.ai",
+      "name": "Marcus Smith",
+      "status": "ENABLED"
+    },
+    "matt.cooper@beatles.ai": {
+      "id": "matt.cooper@beatles.ai",
+      "username": "matt.cooper@beatles.ai",
+      "name": "Matt Cooper",
+      "status": "DEACTIVATED"
+    },
+    "fred.marsh@beatles.ai": {
+      "id": "fred.marsh@beatles.ai",
+      "username": "fred.marsh@beatles.ai",
+      "name": "Fred Marsh",
+      "status": "ENABLED"
+    },
+    "richar.Mike@beatles.ai": {
+      "id": "richar.Mike@beatles.ai",
+      "username": "richar.Mike@beatles.ai",
+      "name": "Richard Mike",
+      "status": "ENABLED"
+    },
+    "samy.joseph@beatles.ai": {
+      "id": "samy.joseph@beatles.ai",
+      "username": "samy.joseph@beatles.ai",
+      "name": "Samy Joseph",
+      "status": "ENABLED"
+    }
+  },
+  "roles": {
+    "beatles-matt-cooper-role": {
+      "id": "beatles-matt-cooper-role",
+      "name": "beatles-matt-cooper-role",
+      "type": "CUSTOM_APP_USER_ROLE",
+      "permissions": [
+        "pManageUsers",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewBank",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pDataEntry",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pManualCharges",
+        "pAccessToHighSecurityPartnersData",
+        "pAccessHIPAAOrgs",
+        "pViewRiskProfile",
+        "pVirtualCardPFY",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "enabedBillbaseUI",
+        "enabledNewSuperOrgPage"
+      ]
+    },
+    "riskops_manager": {
+      "id": "riskops_manager",
+      "name": "riskops_manager",
+      "type": "CUSTOM_APP_ROLE",
+      "permissions": [
+        "pModifyData",
+        "pModifyBank",
+        "pModifyVerify",
+        "pModifyBilling",
+        "pPrintChecks",
+        "pViewOrg",
+        "pViewACH",
+        "pViewBank",
+        "pViewPositivePay",
+        "pViewBilling",
+        "pViewVerify",
+        "pViewCheckInfo",
+        "pEnterVoidChecks",
+        "pViewCheckImage",
+        "pModifyCheckImage",
+        "pDataEntry",
+        "pViewCheckFiles",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pEditFraudControl",
+        "pModifyFundingBank",
+        "pMergeRecords",
+        "pModifyEmail",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pARApproval",
+        "pViewTaxIdReports",
+        "pUpdateOrgBilling",
+        "pManualCharges",
+        "pManualRefunds",
+        "pAccessToHighSecurityPartnersData",
+        "pManageIntlPayments",
+        "pModifyPayment",
+        "pAccessToTinEin",
+        "pPhotoIDVerification",
+        "pAccessHIPAAOrgs",
+        "pManageWalletBalance",
+        "pViewRiskProfile",
+        "pViewComplianceFields",
+        "pEditComplianceFields",
+        "pVirtualCardPFY",
+        "pViewChecks"
+      ]
+    },
+    "processing_l1": {
+      "id": "processing_l1",
+      "name": "processing_l1",
+      "type": "CUSTOM_APP_ROLE",
+      "permissions": [
+        "pModifyData",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewBank",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pDataEntry",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pModifyEmail",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pUpdateOrgBilling",
+        "pManualCharges",
+        "pManualRefunds",
+        "pPhotoIDVerification",
+        "pEditTaxExempt",
+        "pAccessHIPAAOrgs",
+        "pEditPaymentStatus",
+        "pManageBillingDiscounts",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "enabedBillbaseUI",
+        "enabledNewSuperOrgPage"
+      ]
+    },
+    "partner_support_l1": {
+      "id": "partner_support_l1",
+      "name": "partner_support_l1",
+      "type": "CUSTOM_APP_ROLE",
+      "permissions": [
+        "pModifyData",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewBank",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pDataEntry",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pManualCharges",
+        "pAccessToHighSecurityPartnersData",
+        "pAccessHIPAAOrgs",
+        "pViewRiskProfile",
+        "pVirtualCardPFY",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "enabedBillbaseUI",
+        "enabledNewSuperOrgPage"
+      ]
+    },
+    "internal_support_l1": {
+      "id": "internal_support_l1",
+      "name": "internal_support_l1",
+      "type": "CUSTOM_APP_ROLE",
+      "permissions": [
+        "pModifyData",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewACH",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pModifyCheckImage",
+        "pDataEntry",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pModifyEmail",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pSyncTools",
+        "pUpdateOrgBilling",
+        "pSyncConfig",
+        "pAccessHIPAAOrgs",
+        "pViewRiskProfile",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "enabedBillbaseUI"
+      ]
+    },
+    "tech_support_l1": {
+      "id": "tech_support_l1",
+      "name": "tech_support_l1",
+      "type": "CUSTOM_APP_ROLE",
+      "permissions": [
+        "pModifyData",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewACH",
+        "pViewBank",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pModifyCheckImage",
+        "pDataEntry",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pModifyEmail",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pSyncTools",
+        "pUpdateOrgBilling",
+        "pSyncConfig",
+        "pAccessToHighSecurityPartnersData",
+        "pManageFederatedDomains",
+        "pAccessHIPAAOrgs",
+        "pViewRiskProfile",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "pManageStripeAccount",
+        "enabedBillbaseUI",
+        "enabledNewSuperOrgPage",
+        "pModifyData",
+        "pModifyBank",
+        "pModifyBilling",
+        "pViewOrg",
+        "pViewACH",
+        "pViewBank",
+        "pViewBilling",
+        "pViewCheckInfo",
+        "pViewCheckImage",
+        "pModifyCheckImage",
+        "pDataEntry",
+        "pViewCheckReports",
+        "pViewTxnReports",
+        "pMergeRecords",
+        "pModifyEmail",
+        "pImpersonation",
+        "pDoCsEmulation",
+        "pSyncTools",
+        "pUpdateOrgBilling",
+        "pSyncConfig",
+        "pAccessToHighSecurityPartnersData",
+        "pManageFederatedDomains",
+        "pAccessHIPAAOrgs",
+        "pViewRiskProfile",
+        "pViewChecks",
+        "pManageVendorsAdvanced",
+        "pManageStripeAccount",
+        "enabedBillbaseUI",
+        "enabledNewSuperOrgPage"
+      ]
+    }
+  },
+  "assignments": {
+    "fred.marsh@beatles.ai_partner_support_l1": {
+      "id": "fred.marsh@beatles.ai_partner_support_l1",
+      "principalId": "fred.marsh@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "partner_support_l1"
+    },
+    "matt.cooper@beatles.ai_beatles-matt-cooper-role": {
+      "id": "matt.cooper@beatles.ai_beatles-matt-cooper-role",
+      "principalId": "matt.cooper@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "beatles-matt-cooper-role"
+    },
+    "richar.Mike@beatles.ai_tech_support_l1": {
+      "id": "richar.Mike@beatles.ai_tech_support_l1",
+      "principalId": "richar.Mike@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "tech_support_l1"
+    },
+    "marcus.smith@beatles.ai_processing_l1": {
+      "id": "marcus.smith@beatles.ai_processing_l1",
+      "principalId": "marcus.smith@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "processing_l1"
+    },
+    "matt.james@beatles.ai_tech_support_l1": {
+      "id": "matt.james@beatles.ai_tech_support_l1",
+      "principalId": "matt.james@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "tech_support_l1"
+    },
+    "matt.james@beatles.ai_riskops_manager": {
+      "id": "matt.james@beatles.ai_riskops_manager",
+      "principalId": "matt.james@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "riskops_manager"
+    },
+    "samy.joseph@beatles.ai_internal_support_l1": {
+      "id": "samy.joseph@beatles.ai_internal_support_l1",
+      "principalId": "samy.joseph@beatles.ai",
+      "principalType": "HUMAN",
+      "roleId": "internal_support_l1"
+    }
+  },
+  "permissions": {
+    "pModifyData": {
+      "name": "pModifyData"
+    },
+    "pModifyBank": {
+      "name": "pModifyBank"
+    },
+    "pModifyVerify": {
+      "name": "pModifyVerify"
+    },
+    "pModifyBilling": {
+      "name": "pModifyBilling"
+    },
+    "pPrintChecks": {
+      "name": "pPrintChecks"
+    },
+    "pViewOrg": {
+      "name": "pViewOrg"
+    },
+    "pViewACH": {
+      "name": "pViewACH"
+    },
+    "pViewBank": {
+      "name": "pViewBank"
+    },
+    "pViewPositivePay": {
+      "name": "pViewPositivePay"
+    },
+    "pViewBilling": {
+      "name": "pViewBilling"
+    },
+    "pViewVerify": {
+      "name": "pViewVerify"
+    },
+    "pViewCheckInfo": {
+      "name": "pViewCheckInfo"
+    },
+    "pEnterVoidChecks": {
+      "name": "pEnterVoidChecks"
+    },
+    "pViewCheckImage": {
+      "name": "pViewCheckImage"
+    },
+    "pModifyCheckImage": {
+      "name": "pModifyCheckImage"
+    },
+    "pDataEntry": {
+      "name": "pDataEntry"
+    },
+    "pViewCheckFiles": {
+      "name": "pViewCheckFiles"
+    },
+    "pViewCheckReports": {
+      "name": "pViewCheckReports"
+    },
+    "pViewTxnReports": {
+      "name": "pViewTxnReports"
+    },
+    "pEditFraudControl": {
+      "name": "pEditFraudControl"
+    },
+    "pModifyFundingBank": {
+      "name": "pModifyFundingBank"
+    },
+    "pMergeRecords": {
+      "name": "pMergeRecords"
+    },
+    "pModifyEmail": {
+      "name": "pModifyEmail"
+    },
+    "pImpersonation": {
+      "name": "pImpersonation"
+    },
+    "pDoCsEmulation": {
+      "name": "pDoCsEmulation"
+    },
+    "pARApproval": {
+      "name": "pARApproval"
+    },
+    "pViewTaxIdReports": {
+      "name": "pViewTaxIdReports"
+    },
+    "pUpdateOrgBilling": {
+      "name": "pUpdateOrgBilling"
+    },
+    "pManualCharges": {
+      "name": "pManualCharges"
+    },
+    "pManualRefunds": {
+      "name": "pManualRefunds"
+    },
+    "pAccessToHighSecurityPartnersData": {
+      "name": "pAccessToHighSecurityPartnersData"
+    },
+    "pManageIntlPayments": {
+      "name": "pManageIntlPayments"
+    },
+    "pModifyPayment": {
+      "name": "pModifyPayment"
+    },
+    "pAccessToTinEin": {
+      "name": "pAccessToTinEin"
+    },
+    "pPhotoIDVerification": {
+      "name": "pPhotoIDVerification"
+    },
+    "pAccessHIPAAOrgs": {
+      "name": "pAccessHIPAAOrgs"
+    },
+    "pManageWalletBalance": {
+      "name": "pManageWalletBalance"
+    },
+    "pViewRiskProfile": {
+      "name": "pViewRiskProfile"
+    },
+    "pViewComplianceFields": {
+      "name": "pViewComplianceFields"
+    },
+    "pEditComplianceFields": {
+      "name": "pEditComplianceFields"
+    },
+    "pVirtualCardPFY": {
+      "name": "pVirtualCardPFY"
+    },
+    "pViewChecks": {
+      "name": "pViewChecks"
+    },
+    "pSyncTools": {
+      "name": "pSyncTools"
+    },
+    "pSyncConfig": {
+      "name": "pSyncConfig"
+    },
+    "pManageFederatedDomains": {
+      "name": "pManageFederatedDomains"
+    },
+    "pManageVendorsAdvanced": {
+      "name": "pManageVendorsAdvanced"
+    },
+    "pManageStripeAccount": {
+      "name": "pManageStripeAccount"
+    },
+    "enabedBillbaseUI": {
+      "name": "enabedBillbaseUI"
+    },
+    "enabledNewSuperOrgPage": {
+      "name": "enabledNewSuperOrgPage"
+    },
+    "pEditTaxExempt": {
+      "name": "pEditTaxExempt"
+    },
+    "pEditPaymentStatus": {
+      "name": "pEditPaymentStatus"
+    },
+    "pManageBillingDiscounts": {
+      "name": "pManageBillingDiscounts"
+    },
+    "pManageUsers": {
+      "name": "pManageUsers"
+    }
+  }
+}
